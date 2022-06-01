@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet } from 'react-native';
-
+import { Typography } from '../styles';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
+      <Text style={styles.title}>Väderprognos ifrån SMHI</Text>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Text style={[Typography.normal, Typography.center]}>Badplatser och Vattentemperatur ifrån: Karlskrona kommun</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="/screens/ModalScreen.tsx" />
 

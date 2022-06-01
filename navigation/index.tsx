@@ -14,10 +14,13 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import HomeScreen from '../screens/HomeScreen';
+import ListScreen from '../screens/ListScreen';
+import MapScreen from '../screens/MapScreen';
+
+import BadInfoScreen from '../screens/BadInfoScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -43,6 +46,13 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
+     
+      <Stack.Screen name="info">
+      {(screenProps) => <BadInfoScreen {...screenProps} />}
+      </Stack.Screen>
+      
+
+     
     </Stack.Navigator>
   );
 }
@@ -58,16 +68,16 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="home"
+        component={HomeScreen}
+        options={({ navigation }: RootTabScreenProps<'home'>) => ({
+          title: 'Home',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -85,11 +95,19 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="list"
+        component={ListScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Badplatser',
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="map"
+        component={MapScreen}
+        options={{
+          title: 'Karta',
+          tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
         }}
       />
     </BottomTab.Navigator>
